@@ -21,6 +21,9 @@ for directory, subdir_list, file_list in os.walk(root):
         # joins the the os path with the word testing_ prefix in front of it
         target_name = os.path.join(directory, f'testing_{name}')
 
+        print(f"Directory: {directory}")
+        print(f"Subdirectories: {subdir_list}")
+        print(f"Files: {file_list}")
         print(f'Renaming: {source_name} to: {target_name}')
 
         # built in os function rename which will rename the source_name to the target_name
