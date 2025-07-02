@@ -1,7 +1,7 @@
 # Read a CSV file and print out the Select Query as a SQL, with the first line being the column name and the second line being the data type
 # From the website: https://www.learnpython.org/en/Parsing_CSV_Files and https://stackoverflow.com/questions/14674275/skip-first-linefield-in-loop-using-csv-file and 
-# cd D:\PythonProject\learnpython
-# python .\excel2sql.py
+# cd D:\PythonProject\pythonscripts
+# python .\csv2sql.py
 
 # Note that the i is a string which is split into a list so that the contents can be printed out individually
 
