@@ -15,7 +15,7 @@ def withAs(filename2):
         for row in txtfile:
             rowsplit = row.split(' ')
             stripnewline = rowsplit[1].strip()
-            total += "CAST(\'" + rowsplit[0] + "\' AS " + stripnewline + ") AS " + rowsplit[0] + ", "
+            total += "CAST(`" + rowsplit[0] + "` AS " + stripnewline + ") AS " + rowsplit[0] + ", "
         print(total)
 
 # print out the select query with each cast column without the as statement
@@ -27,7 +27,7 @@ def withoutAs(filename2):
         for row in txtfile:
             rowsplit = row.split(' ')
             stripnewline = rowsplit[1].strip()
-            total += "CAST(\'" + rowsplit[0] + "\' AS " + stripnewline + "), "
+            total += "CAST(`" + rowsplit[0] + "` AS " + stripnewline + "), "
         print(total)
 
 # get the csv file from the user, please note that the user only needs to type in the file name in the same directory and doesn't need to add in .csv suffix 

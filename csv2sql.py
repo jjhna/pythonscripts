@@ -17,7 +17,7 @@ def withAs(filename2):
         for row in csvreader:
             for i in row: 
                 splity = i.split()
-                total += "CAST(\'" + splity[0] + "\' AS " + splity[1] + ") AS " + splity[0] + ", "
+                total += "CAST(`" + splity[0] + "` AS " + splity[1] + ") AS " + splity[0] + ", "
         print(total)
 
 # print out the select query with each cast column without the as statement
@@ -30,7 +30,7 @@ def withoutAs(filename2):
         for row in csvreader:
             for i in row: 
                 splity = i.split()
-                total += "CAST(\'" + splity[0] + "\' AS " + splity[1] + "), "
+                total += "CAST(`" + splity[0] + "` AS " + splity[1] + "), "
         print(total)
 
 """
