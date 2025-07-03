@@ -7,6 +7,13 @@
 
 import csv
 
+def checkstring(somestring):
+    match somestring.upper():
+        case "STRING":
+            return 1
+        case _:
+            return 2
+
 # print out the select query with each cast column with the as statement
 def withAs(filename2): 
     total = ""
@@ -17,7 +24,10 @@ def withAs(filename2):
         for row in csvreader:
             for i in row: 
                 splity = i.split()
-                total += "CAST(`" + splity[0] + "` AS " + splity[1] + ") AS " + splity[0] + ", "
+                if checkstring(splity[1] == 1):
+                    total += splity[1] + ", "
+                else:
+                    total += "CAST(`" + splity[0] + "` AS " + splity[1] + ") AS " + splity[0] + ", "
         print(total)
 
 # print out the select query with each cast column without the as statement
@@ -30,7 +40,10 @@ def withoutAs(filename2):
         for row in csvreader:
             for i in row: 
                 splity = i.split()
-                total += "CAST(`" + splity[0] + "` AS " + splity[1] + "), "
+                if checkstring(splity[1] == 1):
+                    total += splity[1] + ", "
+                else:
+                    total += "CAST(`" + splity[0] + "` AS " + splity[1] + "), "
         print(total)
 
 """
@@ -44,7 +57,10 @@ def withAs(filename2):
         next(csvreader)
         total += "SELECT "
         for row in csvreader:
-            total += "CAST(\'" + row[0] + "\' AS " + row[1] + "), "
+            if checkstring(row[1] == 1):
+                total += row[1] + ", "
+            else:
+                total += "CAST(\'" + row[0] + "\' AS " + row[1] + "), "
         print(total)
 
 # print out the select query with each cast column without the as statement
@@ -55,7 +71,10 @@ def withoutAs(filename2):
         next(csvreader)
         total += "SELECT "
         for row in csvreader:
-            total += "CAST(\'" + row[0] + "\' AS " + row[1] + "), "
+            if checkstring(row[1] == 1):
+                total += row[1] + ", "
+            else:
+                total += "CAST(\'" + row[0] + "\' AS " + row[1] + "), "
         print(total)
 
 """
