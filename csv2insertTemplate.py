@@ -41,8 +41,8 @@ def columnsplit(filename2, tableName2):
                 else:
                     total += "','" + value + "'),\n"
         total += "],\n"
-        total += "function1()\n"
-        total += "function2());\n"
+        total += "time()\n"
+        total += ");\n"
         print(total)
 
 """
