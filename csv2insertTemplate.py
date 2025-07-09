@@ -15,6 +15,8 @@ def columnsplit(filename2, tableName2):
         # Iterates through each of the rows in the csv file
         for row in csvreader:
             rowKeys = row # Takes the value of the first row
+            print(type(rowKeys))
+            print(rowKeys)
             column0Split = row['Name'] # the contents of the columns under xxx
             column1Split = row['Age']
             column2Split = row['Sex']

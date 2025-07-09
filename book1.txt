@@ -1,0 +1,3 @@
+apple string
+bear integer
+somebody special
