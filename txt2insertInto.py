@@ -3,13 +3,13 @@
 # python .\txt2insertInto.py
 
 def checkstring(somestring):
-    match somestring.upper().rstrip('\n'):
+    match somestring.upper().strip(",\n"):
         case "STRING":
-            return 1
+            return "'helloworld, "
         case "INTEGER":
-            return 2
+            return "1, "
         case _:
-            return 3
+            return "NULL, "
 
 # print out the select query with each cast column without the as statement
 def insertInto(filename2): 
@@ -17,12 +17,7 @@ def insertInto(filename2):
     with open(filename2, 'r') as txtfile:
         for row in txtfile:
             rowsplit = row.split(' ')
-            if checkstring(rowsplit[1]) == 1:
-                total += "'helloworld', "
-            elif checkstring(rowsplit[1]) == 2:
-                total += "1, "
-            else:
-                total += "NULL, "
+            total += checkstring(rowsplit[1])
         total += ");"
         print(total)
 
