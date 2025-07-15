@@ -15,6 +15,8 @@ def copytextfile(filename2):
                 else:
                     total += s + " "
         print(total)
+        with open("newtext.txt", 'w') as file:
+            file.write(total)
 
 # get the csv file from the user, please note that the user only needs to type in the file name in the same directory and doesn't need to add in .csv suffix 
 filename = input("Please enter the txt file name you want to convert to select SQL query: ")
