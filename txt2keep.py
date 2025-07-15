@@ -2,13 +2,6 @@
 # cd D:\PythonProject\pythonscripts
 # python .\txt2keep.py
 
-def checkstring(somestring):
-    match somestring.upper().strip(",\n"):
-        case "DB":
-            return "DB."
-        case "INT":
-            return "int"
-
 # print out the select query with each cast column without the as statement
 def copytextfile(filename2): 
     total = ""
