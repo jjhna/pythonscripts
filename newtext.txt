@@ -1,0 +1,6 @@
+somebody 
+name string
+ item string
+  price
+ zola 40k
+ 

@@ -1,4 +1,5 @@
 somebody int
 name string
 item string
-price int
+int price
+zola 40k
