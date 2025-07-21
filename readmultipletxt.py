@@ -5,14 +5,19 @@
 
 # print out the select query with each cast column without the as statement
 def getListofFiles(filename, filename2): 
-    total = "\n"
+    total = ""
     #filenamefull = "D:\\PythonProject\\SAMPLE_SERVER\\" + filename + "\\LogFiles\\" + filename2
     filenamefull = "D:\\PythonProject\\SAMPLE_SERVER\\SAMPLE_DB_1\\LogFiles\\SAMPLE_DB_1_LogFiles.xml"
     with open(filenamefull, 'r') as txtfile:
+        bodycount = 0
         for row in txtfile:
             rowsplit = row.split(' ')
             for s in rowsplit:
                 if s == "<body>\n":
+                    bodycount = 1
+                elif (s == "</body>\n") and (bodycount == 1):
+                    bodycount = 0
+                elif bodycount == 1:
                     total += s
         print(total)
         '''
