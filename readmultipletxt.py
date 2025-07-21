@@ -3,7 +3,19 @@
 # cd D:\PythonProject\pythonscripts
 # python .\readmultipletxt.py
 
-# print out the select query with each cast column without the as statement
+# function to return only the specific names of the files from the list of files
+def getListofFileNames(totalFiles):
+    totalList = []
+    invalidwords = ["<", "/>"]
+    totalFiles = totalFiles.split('"')
+    for row in totalFiles:
+       if all(e not in row for e in invalidwords):
+           totalList.append(row)
+    return totalList
+
+    # if not < /> or \n then continue
+
+# function to return the list of files from the original text files
 def getListofFiles(filename, filename2): 
     total = ""
     #filenamefull = "D:\\PythonProject\\SAMPLE_SERVER\\" + filename + "\\LogFiles\\" + filename2
@@ -19,18 +31,30 @@ def getListofFiles(filename, filename2):
                     bodycount = 0
                 elif bodycount == 1:
                     total += s
-        print(total)
-        '''
-        with open("newtext.sql", 'w') as file:
-            file.write(total)
-        '''
+    return total
 
-# get the csv file from the user, please note that the user only needs to type in the file name in the same directory and doesn't need to add in .csv suffix 
-filename = input("Please enter the folder name you want to utilize: ")
-filenametemp = "D:\\PythonProject\\SAMPLE_SERVER\\" + filename
-print(filenametemp)
-filename2 = input("Please enter the the Log file name you want to utilize: ")
-filename2 = filename2 + ".txt"
-filenametemp = filenametemp + "\\LogFiles\\" + filename2
-print(filenametemp)
-getListofFiles(filename, filename2)
+def main():
+    # get the csv file from the user, please note that the user only needs to type in the file name in the same directory and doesn't need to add in .csv suffix 
+    fileName = ""
+    fileNameList = []
+    filename = input("Please enter the folder name you want to utilize: ")
+    filenametemp = "D:\\PythonProject\\SAMPLE_SERVER\\" + filename
+    print(filenametemp)
+    filename2 = input("Please enter the the Log file name you want to utilize: ")
+    filename2 = filename2 + ".txt"
+    filenametemp = filenametemp + "\\LogFiles\\" + filename2
+    print(filenametemp)
+
+    fileName = getListofFiles(filename, filename2)
+    fileNameList = getListofFileNames(fileName)
+    print(fileNameList)
+
+
+if __name__ == "__main__":
+    main()
+
+        
+'''
+with open("newtext.sql", 'w') as file:
+    file.write(total)
+'''
