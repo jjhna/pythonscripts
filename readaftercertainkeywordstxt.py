@@ -11,12 +11,17 @@ def getSQLcontents(filename):
         for row in txtfile:
             # note that strip also removes any leading or trailing whitelines and  \t, \n and \r
             stripped = row.strip()
-            if stripped.startswith("WORKING_AREA"): #once we meet this keyword we can start saving the values
+            #if stripped.startswith("WORKING_AREA"): #once we meet this keyword we can start saving the values
+            #    kickoff = True
+            
+            # This is a better method, since we know the keyword is unique we just need to pull a partial pull from the list and from there make the kickoff turn True
+            if "WORKING_" in stripped:
                 kickoff = True
-            elif stripped.endswith(",") and kickoff == True: 
-                total += stripped + "\n"
+            # this should be first because if ) comes after the comma , py will skip over the else if statement below
             elif stripped.startswith(")") and kickoff == True:
                 total += prev
+            elif stripped.endswith(",") and kickoff == True: 
+                total += stripped + "\n"
             # we make sure to keep the previous iteration if we meet the ")" marker
             prev = stripped
         return(total)
