@@ -2,6 +2,31 @@
 # https://docs.liquibase.com/concepts/changelogs/xml-format.html
 # cd D:\PythonProject\pythonscripts
 # python .\readmultipletxt.py
+# SAMPLE_DB_1
+
+# function to open the source files list and scan through the files for the contents
+def openAndripFiles(filelist):
+    total = ""
+    for i in filelist:
+        with open(i, 'r') as txtfile:
+            kickoff = False
+            for j in txtfile:
+                # Please note that the content below are taken from the readaftercertainkeywordstxt.py script, for more details please view that script instead
+
+                # note that strip also removes any leading or trailing whitelines and  \t, \n and \r
+                stripped = j.strip()
+                #if stripped.startswith("WORKING_AREA"): #once we meet this keyword we can start saving the values
+                #    kickoff = True
+                
+                # This is a better method, since we know the keyword is unique we just need to pull a partial pull from the list and from there make the kickoff turn True
+                if "--changeset" in stripped:
+                    kickoff = True
+                # this should be first because if ) comes after the comma , py will skip over the else if statement below
+                elif stripped.startswith("--comment") and kickoff == True:
+                    total += prev + "\n"
+                # we make sure to keep the previous iteration if we meet the ")" marker
+                prev = stripped
+    print(total)
 
 # function to return the list of files from the original text files
 def getListofFiles(filename, filename2): 
@@ -34,9 +59,11 @@ def getListofFileNames(totalFiles):
 
 # function to open the list of files to get the table names
 def openfileList(foldername, filelist):
+    total = []
     for i in filelist:
         filenamefull = "D:\\PythonProject\\SAMPLE_SERVER\\" + foldername + "\\" + i
-        print(filenamefull)
+        total.append(filenamefull)
+    return total 
 
 
 def main():
@@ -50,10 +77,12 @@ def main():
     filename2 = filename2 + ".xml"
     filenametemp = filenametemp + "\\LogFiles\\" + filename2
     print(filenametemp)
+    print("\n")
 
     fileName = getListofFiles(filename, filename2)
     fileNameList = getListofFileNames(fileName)
-    openfileList(filename, fileNameList)
+    fileNameTotalList = openfileList(filename, fileNameList)
+    openAndripFiles(fileNameTotalList)
 
 
 if __name__ == "__main__":

@@ -38,8 +38,8 @@ def getSQLline(strippedearlier):
 
 def oneSQLline(strippedcolumn):
     total = ""
-    strip = strippedcolumn.split('\n')
-    for i in strip[:-1]:
+    striped = strippedcolumn.split('\n')
+    for i in striped[:-1]:
         total += i.upper() + ","
     return total
 
@@ -49,6 +49,8 @@ def ifExist(onestringlist):
     for s in onestringlist:
         if any(i in s for i in listofstuff): # any() will return true if any of the iterable items are true, so the i is = to the s string and checks through the list for any related items
             total += "CAST " + s + " AS CHUMP,"
+        elif s == onestringlist[-1]:
+            total += s
         else:
             total += s + ","
     return total
