@@ -8,6 +8,7 @@
 def openAndripFiles(filelist):
     total = ""
     for i in filelist:
+        print("Here are the files you want to edit: " + i + "\n")
         with open(i, 'r') as txtfile:
             kickoff = False
             for j in txtfile:
@@ -20,10 +21,16 @@ def openAndripFiles(filelist):
                 
                 # This is a better method, since we know the keyword is unique we just need to pull a partial pull from the list and from there make the kickoff turn True
                 if "--changeset" in stripped:
+                    afterstrip = stripped.split(":",1)[1]
+                    int1 = int(afterstrip)
+                    int1 += 1
+                    int2string = str(int1)
+                    total += stripped.split(":",1)[0] + ":" + int2string + "\n"
+                    #print("stripped: " + stripped)
                     kickoff = True
                 # this should be first because if ) comes after the comma , py will skip over the else if statement below
-                elif stripped.startswith("--comment") and kickoff == True:
-                    total += prev + "\n"
+                else:
+                    total += stripped + "\n"
                 # we make sure to keep the previous iteration if we meet the ")" marker
                 prev = stripped
     print(total)
