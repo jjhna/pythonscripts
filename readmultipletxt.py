@@ -5,35 +5,32 @@
 # SAMPLE_DB_1
 
 # function to open the source files list and scan through the files for the contents
-def openAndripFiles(filelist):
+def openAndripFiles(filename):
     total = ""
-    for i in filelist:
-        print("Here are the files you want to edit: " + i + "\n")
-        with open(i, 'r') as txtfile:
-            kickoff = False
-            for j in txtfile:
-                # Please note that the content below are taken from the readaftercertainkeywordstxt.py script, for more details please view that script instead
+    with open(filename, 'r') as txtfile:
+        for j in txtfile:
+            # Please note that the content below are taken from the readaftercertainkeywordstxt.py script, for more details please view that script instead
 
-                # note that strip also removes any leading or trailing whitelines and  \t, \n and \r
-                stripped = j.strip()
-                #if stripped.startswith("WORKING_AREA"): #once we meet this keyword we can start saving the values
-                #    kickoff = True
-                
-                # This is a better method, since we know the keyword is unique we just need to pull a partial pull from the list and from there make the kickoff turn True
-                if "--changeset" in stripped:
-                    afterstrip = stripped.split(":",1)[1]
-                    int1 = int(afterstrip)
-                    int1 += 1
-                    int2string = str(int1)
-                    total += stripped.split(":",1)[0] + ":" + int2string + "\n"
-                    #print("stripped: " + stripped)
-                    kickoff = True
-                # this should be first because if ) comes after the comma , py will skip over the else if statement below
-                else:
-                    total += stripped + "\n"
-                # we make sure to keep the previous iteration if we meet the ")" marker
-                prev = stripped
-    print(total)
+            # note that strip also removes any leading or trailing whitelines and  \t, \n and \r
+            stripped = j.strip()
+            # This is a better method, since we know the keyword is unique we just need to pull a partial pull from the list and from there make the kickoff turn True
+            if "--changeset" in stripped:
+                # remember you can store any list into multiple variables, here we are splitting the string into 2 varaibles between the ":" character, and only split on the first instance of ":"
+                beforestrip, afterstrip = stripped.split(":",1)
+                numba1, finalstrip = afterstrip.split(" ", 1)
+                int1 = int(numba1)
+                int1 += 1
+                int2string = str(int1)
+                total += beforestrip + ":" + int2string + " " + finalstrip + "\n"
+            # this should be first because if ) comes after the comma , py will skip over the else if statement below
+            else:
+                total += stripped + "\n"
+        print(total)
+    with open(filename, 'w') as writefile:
+        writefile.write(total)
+
+
+        
 
 # function to return the list of files from the original text files
 def getListofFiles(filename, filename2): 
@@ -89,14 +86,13 @@ def main():
     fileName = getListofFiles(filename, filename2)
     fileNameList = getListofFileNames(fileName)
     fileNameTotalList = openfileList(filename, fileNameList)
-    openAndripFiles(fileNameTotalList)
+    for i in fileNameTotalList:
+        print("Here are the files you want to edit: " + i + "\n")
+        openAndripFiles(i)
+        print("\n")
 
 
 if __name__ == "__main__":
     main()
 
         
-'''
-with open("newtext.sql", 'w') as file:
-    file.write(total)
-'''
