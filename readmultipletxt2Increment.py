@@ -1,10 +1,11 @@
 # Read a txt file and only keep certain rows that contain the certain keywords
 # https://docs.liquibase.com/concepts/changelogs/xml-format.html
 # cd D:\PythonProject\pythonscripts
-# python .\readmultipletxt.py
+# python .\readmultipletxt2Increment.py
 # SAMPLE_DB_1
 
 # function to open the source files list and scan through the files for the contents
+# and find certain keywords in the text and increment that value and return it to the user or overwrite that value in the same file
 def openAndripFiles(filename):
     total = ""
     with open(filename, 'r') as txtfile:
@@ -26,11 +27,8 @@ def openAndripFiles(filename):
             else:
                 total += stripped + "\n"
         print(total)
-    with open(filename, 'w') as writefile:
-        writefile.write(total)
-
-
-        
+    #with open(filename, 'w') as writefile:
+    #    writefile.write(total)
 
 # function to return the list of files from the original text files
 def getListofFiles(filename, filename2): 
