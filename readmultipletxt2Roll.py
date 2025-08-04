@@ -1,7 +1,7 @@
-# Read a txt file and only keep certain rows that contain the certain keywords
-# https://docs.liquibase.com/concepts/changelogs/xml-format.html
+# Read a txt file and only keep certain rows that contain the certain keywords, in this case rollback
+# https://docs.liquibase.com/workflows/liquibase-community/using-rollback.html
 # cd D:\PythonProject\pythonscripts
-# python .\readmultipletxt2Script.py
+# python .\readmultipletxt2Roll.py
 # SAMPLE_DB_1
 
 # function that removes all string instances, if it contains a special keyword 
@@ -11,15 +11,14 @@ def openAndripHype(filename):
     with open(filename, 'r') as txtfile:
         for j in txtfile:
             # Please note that the content below are taken from the readaftercertainkeywordstxt.py script, for more details please view that script instead
-            if "--" not in j:
+            if "--rollback" in j:
                 total.append(j)
         return total
 
 # function to open the source files list and scan through the files for the contents
-# and find certain keywords in the text and append or add a string before that keyword
-def openAndripDots(stringline):
+# and find certain keywords in the text and remove them from the text and return the rest to the user
+def openAndripDash(stringline):
     total = ""
-    listofstuff = ["AGENTS.","AGENTO.","`AGENTS.","`AGENTO."] # list of strings you want to edit out, make sure its captialized 
     for j in stringline:
         # Please note that the content below are taken from the readaftercertainkeywordstxt.py script, for more details please view that script instead
         
@@ -27,16 +26,10 @@ def openAndripDots(stringline):
         stripped = j.strip()
         stripped2 = stripped.split()
         #print(stripped2)
-        #if any(i in stripped2.upper() for i in listofstuff): # any() will return true if any of the iterable items are true, so the i is = to the s string and checks through the list for any related items
-        #    print("hi")
-        for i in stripped2:
-            if any(j in i.upper() for j in listofstuff):
-                beforestrip, afterstrip = i.split(".",1)
-                total += "SERVER." + beforestrip + "." + afterstrip + " "
-            elif i == stripped2[-1]: # if i the iteration is at the very last item in the list (stripped2[-1]) then we will add in a newline at the end
+        for i in stripped2[1:]:
+            if i == stripped2[-1]: # if i the iteration is at the very last item in the list (stripped2[-1]) then we will add in a newline at the end
                 total += i + "\n"
             else:
-                #total += stripped + "\n"
                 total += i + " "
     return total
     #with open(filename, 'w') as writefile:
@@ -101,7 +94,7 @@ def main():
     for i in fileNameTotalList:
         print("Here are the files you want to edit: " + i + "\n")
         theString = openAndripHype(i)
-        theFinalString = openAndripDots(theString)      
+        theFinalString = openAndripDash(theString)      
         print(theFinalString)
         print("\n")
 
