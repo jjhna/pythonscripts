@@ -4,6 +4,20 @@
 # python .\readmultipletxt2Script.py
 # SAMPLE_DB_1
 
+# function that reads the config.txt file to determine the folder name and the log files
+def openAndGetFiles():
+    ret = []
+    with open("config.txt", 'r') as txtfile:
+        aftersplit = []
+        # split the row by spaces and strip any empty spaces before or after on each row and newlines and add them into a list
+        for j in txtfile:
+            aftersplit.append(j.strip().split(" "))
+        # from the previous list, we will use the zip function to return our iteration as a tuple or paired item where we can get the 1st and 2nd top elements of each row back to the user
+        for a, b in zip(aftersplit[0], aftersplit[1]):
+            ret.append(a)
+            ret.append(b)
+    return ret
+
 # function that removes all string instances, if it contains a special keyword 
 def openAndripHype(filename):
     total = []
@@ -42,11 +56,25 @@ def openAndripDots(stringline):
     #with open(filename, 'w') as writefile:
     #    writefile.write(total)
 
+def stripFiles(filelist):
+    returnal = []
+    for i in filelist:
+        i.strip()
+    for j in filelist:
+        returnal = j.split("\n")
+    if len(returnal) == 2:
+        del returnal[1]
+    elif len(returnal) % 2 != 0:
+        del returnal[-1]
+    print("returanl: ")
+    print(returnal)
+    return returnal
+
 # function to return the list of files from the original text files
 def getListofFiles(filename, filename2): 
     total = ""
-    #filenamefull = "D:\\PythonProject\\SAMPLE_SERVER\\" + filename + "\\LogFiles\\" + filename2
-    filenamefull = "D:\\PythonProject\\SAMPLE_SERVER\\SAMPLE_DB_1\\LogFiles\\SAMPLE_DB_1_LogFiles.xml"
+    filenamefull = "D:\\PythonProject\\SAMPLE_SERVER\\" + filename + "\\LogFiles\\" + filename2
+    #filenamefull = "D:\\PythonProject\\SAMPLE_SERVER\\SAMPLE_DB_1\\LogFiles\\SAMPLE_DB_1_LogFiles.xml"
     with open(filenamefull, 'r') as txtfile:
         bodycount = 0
         for row in txtfile:
@@ -82,28 +110,36 @@ def openfileList(foldername, filelist):
 
 def main():
     # get the csv file from the user, please note that the user only needs to type in the file name in the same directory and doesn't need to add in .csv suffix 
-    fileName = ""
-    fileNameList = []
-    filename = input("Please enter the folder name you want to utilize: ")
-    filenametemp = "D:\\PythonProject\\SAMPLE_SERVER\\" + filename
-    print(filenametemp)
-    filename2 = input("Please enter the the Log file name you want to utilize: ")
-    filename2 = filename2 + ".xml"
-    filenametemp = filenametemp + "\\LogFiles\\" + filename2
-    print(filenametemp)
-    print("\n")
-
-    fileName = getListofFiles(filename, filename2)
-    fileNameList = getListofFileNames(fileName)
-    fileNameTotalList = openfileList(filename, fileNameList)
-    theString = ""
-    theFinalString = ""
-    for i in fileNameTotalList:
-        print("Here are the files you want to edit: " + i + "\n")
-        theString = openAndripHype(i)
-        theFinalString = openAndripDots(theString)      
-        print(theFinalString)
+    configList = openAndGetFiles()
+    #filename = input("Please enter the folder name you want to utilize: ")
+    for i in range(0, len(configList), 2):
+        f1 = configList[i]
+        f2 = configList[i+1]
+        filename = f1
+        filenametemp = "D:\\PythonProject\\SAMPLE_SERVER\\" + filename
+        #print(filenametemp)
+        #filename2 = input("Please enter the the Log file name you want to utilize: ")
+        filename2 = f2 + ".xml"
+        filenametemp = filenametemp + "\\LogFiles\\" + filename2
+        print("filetemp " +filenametemp)
         print("\n")
+
+        #issue in the getListofFiles()
+        fullFileName = getListofFiles(filename, filename2)
+        print("fullfile: " + fullFileName)
+        fileNameList = getListofFileNames(fullFileName)
+        print("filenamelist: ")
+        print(fileNameList)
+        returnal = stripFiles(fileNameList)
+        fileNameTotalList = openfileList(filename, returnal)
+        print("filenametotallist: ")
+        print(fileNameTotalList)
+        for i in fileNameTotalList:
+            print("Here are the files you want to edit: " + i + "\n")
+            theString = openAndripHype(i)
+            theFinalString = openAndripDots(theString)      
+            print(theFinalString)
+            print("\n")
 
 
 if __name__ == "__main__":
