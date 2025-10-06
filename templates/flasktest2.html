@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Options</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Select the options you want:</h2>
+    <form method="POST">
+        {% for option in options %}
+            <label>
+                <input type="checkbox" name="options" value="{{ option }}"
+                    {% if option in selected %}checked{% endif %}>
+                {{ option }}
+            </label>
+        {% endfor %}
+
+        <label for="new_option">Add a new option:</label>
+        <input type="text" name="new_option" id="new_option" placeholder="Type a new option">
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if selected %}
+        <h3>You selected:</h3>
+        <ul>
+        {% for item in selected %}
+            <li>{{ item }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
