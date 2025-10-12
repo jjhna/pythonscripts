@@ -1,6 +1,16 @@
 <!--Note that any html for flask python needs to be placed in the folder named templates-->
-
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
 <body>
     <h1>Hello from Flask!</h1>
+    This is a checkbox
+    <input type="checkbox" id="checkbox1" name="checkbox1">
+    <br>
+    <br>
+    Text input <input type="text" id="textbox1" name="textbox1" disabled="disabled" placeholder="Please enter a numba">
+    <br>
+    <script src="{{ url_for('static', filename='js/flasktest.js') }}"></script>
 </body>
 </html>
+

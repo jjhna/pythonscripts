@@ -1,0 +1,10 @@
+h1 {
+    font-size: 40px;
+    text-align: center;
+    background-color: blue;
+    border-color: crimson;
+    font: bolder;
+    text-decoration:underline;
+    zoom: 100%;
+    animation: alternate;
+}
