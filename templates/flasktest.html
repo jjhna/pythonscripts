@@ -4,12 +4,21 @@
 </head>
 <body>
     <h1>Hello from Flask!</h1>
-    This is a checkbox
-    <input type="checkbox" id="checkbox1" name="checkbox1">
-    <br>
-    <br>
-    Text input <input type="text" id="textbox1" name="textbox1" disabled="disabled" placeholder="Please enter a numba">
-    <br>
+    <form action="/frontpage" method="POST">
+        This is a checkbox
+        <input type="checkbox" id="checkbox1" name="checkbox1">
+        <br>
+        <br>
+        Text input <input type="text" id="textbox1" name="textbox1" disabled="disabled" placeholder="Please enter a numba">
+        <br>
+        Result is {{ resulttextbox1 }}
+        <br>
+        Text input 2 <input type="text" id="textbox2" name="textbox2" placeholder="Please enter sum w0rds">
+        <br>
+        Result is {{ resulttextbox2 }}
+        <br>
+        <button type="submit">Submit Button</button>
+    </form>
     <script src="{{ url_for('static', filename='js/flasktest.js') }}"></script>
 </body>
 </html>
