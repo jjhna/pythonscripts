@@ -9,9 +9,15 @@
 <body>
   <header>
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
+      <div class="nav-brand">
+        <a href="{{ url_for('index') }}" class="brand-link" aria-label="Home">
+          <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Sample Logo" class="brand-logo">
+        </a>
+      </div>
+
       <ul class="nav">
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link">Menu 1</a>
+          <a href="#" class="nav-link"><img src="{{ url_for('static', filename='images/menu-icon1.svg') }}" alt="" class="nav-icon"> Menu 1</a>
           <ul class="dropdown-content">
             <li><a href="{{ url_for('page1') }}">Page 1</a></li>
             <li><a href="{{ url_for('page2') }}">Page 2</a></li>
@@ -19,7 +25,7 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link">Menu 2</a>
+          <a href="#" class="nav-link"><img src="{{ url_for('static', filename='images/menu-icon1.svg') }}" alt="" class="nav-icon"> Menu 2</a>
           <ul class="dropdown-content">
             <li><a href="{{ url_for('page3') }}">Page 3</a></li>
             <li><a href="{{ url_for('page4') }}">Page 4</a></li>

@@ -4,12 +4,19 @@ body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; background: 
 .container { padding: 2rem; }
 
 /* Navbar */
-.navbar { background: #333; }
+.navbar { background: #333; display: flex; align-items: center; justify-content: space-between; padding: 0.25rem 0.5rem; }
 .nav { list-style: none; display: flex; gap: 0.5rem; padding: 0.5rem; align-items: center; }
 .nav-link { color: #fff; text-decoration: none; display: inline-block; padding: 0.5rem 0.75rem; }
 .nav-link:hover, .nav-link:focus { background: #444; }
 
 .nav-item { position: relative; }
+
+/* Brand/logo */
+.nav-brand { margin-left: 0.5rem; margin-right: 1rem; }
+.brand-logo { height: 40px; width: auto; display: block; }
+
+/* Small icon next to link label */
+.nav-icon { height: 18px; width: 18px; vertical-align: middle; margin-right: 0.5rem; }
 
 /* Dropdown content (hidden by default) */
 .dropdown-content { display: none; position: absolute; left: 0; top: 100%; background: #fff; min-width: 160px; box-shadow: 0 6px 12px rgba(0,0,0,0.15); border-radius: 4px; padding: 0.25rem 0; z-index: 200; }
@@ -26,6 +33,9 @@ body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; background: 
 
 /* Footer */
 .footer { padding: 1rem 2rem; color: #666; font-size: 0.9rem; }
+
+/* Sample image styling for pages */
+.sample-img { display: block; max-width: 100%; height: auto; margin-top: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 
 /* Responsive tweak: stack nav items on small screens */
 @media (max-width: 640px) {
