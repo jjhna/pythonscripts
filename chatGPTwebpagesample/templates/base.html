@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Sample Flask Site{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+      <ul class="nav">
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link">Menu 1</a>
+          <ul class="dropdown-content">
+            <li><a href="{{ url_for('page1') }}">Page 1</a></li>
+            <li><a href="{{ url_for('page2') }}">Page 2</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link">Menu 2</a>
+          <ul class="dropdown-content">
+            <li><a href="{{ url_for('page3') }}">Page 3</a></li>
+            <li><a href="{{ url_for('page4') }}">Page 4</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <p>Sample site — CSS only dropdown navbar (no JavaScript).</p>
+  </footer>
+</body>
+</html>

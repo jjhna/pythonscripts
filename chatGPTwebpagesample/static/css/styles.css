@@ -1,0 +1,34 @@
+/* Basic reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; background: #f5f5f5; color: #222; }
+.container { padding: 2rem; }
+
+/* Navbar */
+.navbar { background: #333; }
+.nav { list-style: none; display: flex; gap: 0.5rem; padding: 0.5rem; align-items: center; }
+.nav-link { color: #fff; text-decoration: none; display: inline-block; padding: 0.5rem 0.75rem; }
+.nav-link:hover, .nav-link:focus { background: #444; }
+
+.nav-item { position: relative; }
+
+/* Dropdown content (hidden by default) */
+.dropdown-content { display: none; position: absolute; left: 0; top: 100%; background: #fff; min-width: 160px; box-shadow: 0 6px 12px rgba(0,0,0,0.15); border-radius: 4px; padding: 0.25rem 0; z-index: 200; }
+.dropdown-content li { list-style: none; }
+.dropdown-content a { color: #222; padding: 0.5rem 1rem; display: block; text-decoration: none; }
+.dropdown-content a:hover, .dropdown-content a:focus { background: #f0f0f0; }
+
+/* Show dropdown on hover or when focused (keyboard accessible) */
+.dropdown:hover > .dropdown-content,
+.dropdown:focus-within > .dropdown-content { display: block; }
+
+/* Make top-level nav items look like buttons */
+.nav > li { border-radius: 4px; }
+
+/* Footer */
+.footer { padding: 1rem 2rem; color: #666; font-size: 0.9rem; }
+
+/* Responsive tweak: stack nav items on small screens */
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: stretch; }
+  .dropdown-content { position: static; box-shadow: none; }
+}
