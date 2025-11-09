@@ -4,15 +4,15 @@ body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; background: 
 .container { padding: 2rem; }
 
 /* Navbar */
-.navbar { background: #333; display: flex; align-items: center; justify-content: space-between; padding: 0.25rem 0.5rem; }
-.nav { list-style: none; display: flex; gap: 0.5rem; padding: 0.5rem; align-items: center; }
+.navbar { background: #333; display: flex; align-items: center; padding: 0.25rem 0.75rem; gap: 1rem; }
+.nav { list-style: none; display: flex; gap: 0.5rem; padding: 0.5rem 0; align-items: center; margin: 0; }
 .nav-link { color: #fff; text-decoration: none; display: inline-block; padding: 0.5rem 0.75rem; }
 .nav-link:hover, .nav-link:focus { background: #444; }
 
 .nav-item { position: relative; }
 
 /* Brand/logo */
-.nav-brand { margin-left: 0.5rem; margin-right: 1rem; }
+.nav-brand { margin-left: 0; margin-right: 0.5rem; display: flex; align-items: center; }
 .brand-logo { height: 40px; width: auto; display: block; }
 
 /* Small icon next to link label */
@@ -27,6 +27,22 @@ body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; background: 
 /* Show dropdown on hover or when focused (keyboard accessible) */
 .dropdown:hover > .dropdown-content,
 .dropdown:focus-within > .dropdown-content { display: block; }
+
+/* Multi-level submenu */
+.has-submenu { position: relative; }
+.has-submenu > a { display: flex; justify-content: space-between; align-items: center; }
+.has-submenu > a::after { content: '\25B6'; font-size: 0.7rem; margin-left: 0.5rem; color: #666; }
+.submenu { display: none; position: absolute; left: 100%; top: 0; background: #fff; min-width: 160px; box-shadow: 0 6px 12px rgba(0,0,0,0.12); border-radius: 4px; padding: 0.25rem 0; z-index: 250; }
+.submenu li { list-style: none; }
+.submenu a { padding: 0.5rem 1rem; display: block; color: #222; text-decoration: none; }
+.has-submenu:hover > .submenu,
+.has-submenu:focus-within > .submenu { display: block; }
+
+/* Ensure submenu doesn't overflow viewport on small screens */
+@media (max-width: 640px) {
+  .submenu { position: static; left: auto; top: auto; box-shadow: none; }
+  .has-submenu > a::after { content: '\25BC'; }
+}
 
 /* Make top-level nav items look like buttons */
 .nav > li { border-radius: 4px; }
