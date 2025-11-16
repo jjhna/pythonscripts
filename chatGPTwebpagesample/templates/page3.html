@@ -4,4 +4,62 @@
   <h1>Page 3</h1>
   <p>Sample content for page 3. This site demonstrates a CSS-only dropdown nav.</p>
   <p>Random sample: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <section class="form-section">
+    <h2>Contact / Sample Form</h2>
+
+    <p class="muted">You can upload a CSV to populate the form. The CSV may include headers (name,email,message) or provide the values in order.</p>
+    <form action="{{ url_for('upload_csv') }}" method="post" enctype="multipart/form-data" class="upload-form">
+      <div class="form-row">
+        <label for="csvfile">Upload CSV</label>
+        <input type="file" id="csvfile" name="csvfile" accept=".csv" required>
+      </div>
+      <div class="form-row form-actions">
+        <button type="submit" class="btn">Upload CSV</button>
+      </div>
+    </form>
+
+    <hr>
+
+    <p class="muted">Or upload a plain text file (.txt). Supported formats:
+      <ul>
+        <li>Key/value per line: <code>name: Alice</code>, <code>email: a@b.com</code>, <code>message: Hello</code></li>
+        <li>Positional lines: first line = name, second = email, third+ = message</li>
+      </ul>
+    </p>
+    <form action="{{ url_for('upload_text') }}" method="post" enctype="multipart/form-data" class="upload-form">
+      <div class="form-row">
+        <label for="textfile">Upload Text File</label>
+        <input type="file" id="textfile" name="textfile" accept=".txt,.text" required>
+      </div>
+      <div class="form-row form-actions">
+        <button type="submit" class="btn">Upload Text File</button>
+      </div>
+    </form>
+
+    <hr>
+
+    <form action="{{ url_for('page3') }}" method="post" class="sample-form" novalidate>
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required
+               value="{{ prefill['name'] if prefill and 'name' in prefill else '' }}">
+      </div>
+
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required
+               value="{{ prefill['email'] if prefill and 'email' in prefill else '' }}">
+      </div>
+
+      <div class="form-row">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write a short message...">{{ prefill['message'] if prefill and 'message' in prefill else '' }}</textarea>
+      </div>
+
+      <div class="form-row form-actions">
+        <button type="submit" class="btn">Send</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+      </div>
+    </form>
+  </section>
 {% endblock %}
