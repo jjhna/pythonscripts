@@ -32,10 +32,14 @@ def page3():
 
         # Very small server-side validation for the sample.
         if not name or not email:
+            # Preserve entered values so they survive the redirect (no JS required)
+            session['prefill'] = {'name': name, 'email': email, 'message': message}
             flash('Please provide both name and email.', 'error')
             return redirect(url_for('page3'))
 
         # In a real app you might store the message, send an email, etc.
+        # Clear any stored prefill on successful submit so the form resets
+        session.pop('prefill', None)
         flash('Thank you, your message was received.', 'success')
         return redirect(url_for('page3'))
 
