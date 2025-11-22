@@ -16,6 +16,11 @@
       </div>
 
       <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('settings') }}">Settings</a></li>
+
+        <!-- Menu 2 removed -->
+
         <li class="nav-item dropdown">
           <a href="#" class="nav-link"><img src="{{ url_for('static', filename='images/menu-icon1.svg') }}" alt="" class="nav-icon"> Menu 1</a>
           <ul class="dropdown-content">
@@ -29,10 +34,6 @@
             <li><a href="{{ url_for('page2') }}">Page 2</a></li>
           </ul>
         </li>
-
-        <!-- Menu 2 removed -->
-
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
       </ul>
     </nav>
   </header>

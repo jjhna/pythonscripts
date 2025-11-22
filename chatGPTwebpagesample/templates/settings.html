@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Settings - Sample Flask Site{% endblock %}
+{% block content %}
+  <h1>Settings</h1>
+  <p>Update the example hints used on the contact form (Page 3). These are stored per-session and will be used to prefill the example boxes.</p>
+
+  <section class="form-section">
+    <form action="{{ url_for('settings') }}" method="post" class="settings-form" novalidate>
+      <div class="form-row">
+        <label for="hint_name">Example for Name</label>
+        <input id="hint_name" name="hint_name" type="text" placeholder="Ex: John Doe" value="{{ settings.get('hint_name','') }}">
+      </div>
+
+      <div class="form-row">
+        <label for="hint_email">Example for Email</label>
+        <input id="hint_email" name="hint_email" type="email" placeholder="Ex: john@example.com" value="{{ settings.get('hint_email','') }}">
+      </div>
+
+      <div class="form-row">
+        <label for="hint_message">Example for Message</label>
+        <textarea id="hint_message" name="hint_message" rows="4" placeholder="Ex: Hello, I'd like to...">{{ settings.get('hint_message','') }}</textarea>
+      </div>
+
+      <div class="form-row form-actions">
+        <button type="submit" name="action" value="save" class="btn" formnovalidate>Save</button>
+        <button type="submit" name="action" value="reset" class="btn btn-secondary" formnovalidate>Reset to defaults</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}

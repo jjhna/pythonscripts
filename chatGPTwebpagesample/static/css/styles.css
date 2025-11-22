@@ -54,8 +54,8 @@ body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; background: 
 .sample-img { display: block; max-width: 100%; height: auto; margin-top: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 
 /* Simple form styles */
-.form-section { margin-top: 1.25rem; background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-.sample-form { max-width: 720px; }
+.form-section { margin-top: 1.25rem; background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); max-width: 100%; }
+.sample-form { max-width: none; width: 100%; }
 .form-row { display: flex; flex-direction: column; margin-bottom: 0.75rem; }
 .form-row label { margin-bottom: 0.35rem; font-weight: 600; }
 .form-row input, .form-row textarea { padding: 0.5rem 0.65rem; border: 1px solid #dcdcdc; border-radius: 6px; font-size: 0.95rem; }
@@ -77,6 +77,24 @@ body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; background: 
 .muted { color: #666; font-size: 0.95rem; margin-bottom: 0.5rem; }
 .muted ul { margin: 0.25rem 0 0.75rem 1.1rem; }
 .muted code { background: #fafafa; padding: 0.1rem 0.3rem; border-radius: 4px; border: 1px solid #eee; }
+
+/* Input-with-hint: shows a short example to the right of the input/textarea */
+/* Layout: input left 50%, example hint right 50% on wide screens */
+.input-with-hint { display: flex; gap: 1rem; align-items: center; }
+.input-with-hint input { flex: 0 0 50%; min-width: 0; }
+.input-with-hint textarea { flex: 0 0 50%; min-width: 0; }
+.input-with-hint.textarea-hint { align-items: flex-start; }
+.field-hint { color: #444; font-size: 0.95rem; white-space: normal; flex: 0 0 50%; background: #fafafa; padding: 0.75rem 0.9rem; border-radius: 6px; border: 1px solid #f0f0f0; }
+
+@media (max-width: 900px) {
+  .input-with-hint { flex-direction: column; align-items: stretch; }
+  .input-with-hint input, .input-with-hint textarea, .field-hint { flex: none; width: 100%; }
+  .field-hint { margin-top: 0.35rem; }
+}
+
+/* Settings form tweaks */
+.settings-form { max-width: 960px; }
+.settings-form .form-actions { justify-content: flex-start; }
 
 /* Responsive tweak: stack nav items on small screens */
 @media (max-width: 640px) {

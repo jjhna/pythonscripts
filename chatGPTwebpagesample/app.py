@@ -45,7 +45,9 @@ def page3():
 
     # On GET, check for any CSV prefill data stored in session and pass to template.
     prefill = session.pop('prefill', None)
-    return render_template('page3.html', prefill=prefill)
+    # Provide settings (examples) to the template if available
+    settings_obj = session.get('settings', {})
+    return render_template('page3.html', prefill=prefill, settings=settings_obj)
 
 
 @app.route('/upload_csv', methods=['POST'])
@@ -158,6 +160,63 @@ def upload_text():
 @app.route('/page4')
 def page4():
     return render_template('page4.html')
+
+
+@app.route('/settings', methods=['GET', 'POST'])
+def settings():
+    # Settings to control the example hints on page3 (stored per-session)
+    if request.method == 'POST':
+        # Support both saving new settings and resetting to defaults
+        action = request.form.get('action', 'save')
+        if action == 'reset':
+            session.pop('settings', None)
+            # Also populate the contact form prefill with cleaned default values
+            # so the user can submit the contact form using the defaults immediately.
+            defaults = {
+                'hint_name': 'Ex: John Doe',
+                'hint_email': 'Ex: john@example.com',
+                'hint_message': "Ex: Hello, I'd like to..."
+            }
+
+            import re
+            def _clean_hint(s):
+                # remove common example prefixes like 'Ex:' or 'Example:'
+                return re.sub(r'^\s*(Ex(?:ample)?[:\-\s]*)', '', s).strip()
+
+            session['prefill'] = {
+                'name': _clean_hint(defaults['hint_name']),
+                'email': _clean_hint(defaults['hint_email']),
+                'message': _clean_hint(defaults['hint_message'])
+            }
+
+            flash('Settings reset to defaults. Contact form populated with defaults.', 'success')
+            return redirect(url_for('settings'))
+
+        hint_name = request.form.get('hint_name', '').strip()
+        hint_email = request.form.get('hint_email', '').strip()
+        hint_message = request.form.get('hint_message', '').strip()
+
+        # Basic truncation to avoid bloating the session cookie
+        MAX_HINT = 1000
+        settings_obj = {
+            'hint_name': hint_name[:MAX_HINT],
+            'hint_email': hint_email[:MAX_HINT],
+            'hint_message': hint_message[:MAX_HINT]
+        }
+        session['settings'] = settings_obj
+        flash('Settings saved.', 'success')
+        return redirect(url_for('settings'))
+
+    settings_obj = session.get('settings', {})
+    # Provide sensible defaults for the settings form when none have been saved yet
+    defaults = {
+        'hint_name': 'Ex: John Doe',
+        'hint_email': 'Ex: john@example.com',
+        'hint_message': "Ex: Hello, I'd like to..."
+    }
+    # Merge saved settings over defaults
+    merged = { **defaults, **settings_obj }
+    return render_template('settings.html', settings=merged)
 
 
 if __name__ == '__main__':
