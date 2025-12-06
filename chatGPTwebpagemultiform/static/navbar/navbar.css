@@ -1,0 +1,50 @@
+/* Minimal, clean navbar styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.5rem 1rem;
+  background: #ffffff;
+  border-bottom: 1px solid #ececec;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+  gap: 0.75rem;
+  z-index: 1000;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-links a {
+  display: inline-block;
+  text-decoration: none;
+  color: #111827;
+  font-weight: 600;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  transition: background-color 150ms ease, color 150ms ease, transform 120ms ease;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  background-color: #f3f4f6;
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+/* Optional active state class you can add server-side */
+.nav-links a.active {
+  background-color: #eef2ff;
+  color: #4f46e5;
+}
+
+/* Responsive tweaks */
+@media (max-width: 520px) {
+  .navbar { padding: 0.4rem 0.6rem; }
+  .nav-links a { padding: 0.35rem 0.5rem; font-size: 0.9rem; }
+}

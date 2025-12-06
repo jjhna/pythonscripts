@@ -4,16 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Flask App</title>
-  <link rel="stylesheet" href="../navbar/navbar.css">
+  <link rel="stylesheet" href="/static/navbar/navbar.css">
 </head>
 <body>
-  <header class="navbar">
-    <nav class="nav-links">
-      <a href="/">Home</a>
-      <a href="/form1">Form1</a>
-      <a href="/settings">Settings</a>
-    </nav>
-  </header>
+  <!-- Reusable navbar loaded from navbar/navbar.html (no JS) -->
+  <iframe src="/navbar/navbar.html" title="navbar" style="border:0;width:100%;height:56px;"> </iframe>
   Hello world form
   <br>
   How to use this website
