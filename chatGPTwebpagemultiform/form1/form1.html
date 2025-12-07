@@ -8,6 +8,37 @@
 <body>
   <!-- Reusable navbar loaded from navbar/navbar.html (no JS) -->
   <iframe src="/navbar/navbar.html" title="navbar" style="border:0;width:100%;height:56px;"> </iframe>
-  Hello world form
+  Form 1
+  <form>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname"><br>
+    <input type="checkbox" id="subscribe" name="subscribe" value="newsletter">
+    <label for="subscribe"> Subscribe to newsletter</label><br>
+    <label for="country">Country:</label><br>
+    <input type="text" id="country" name="country"><br>
+    <label for="comments">Comments:</label><br>
+    <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br>
+    <label for="gender">Gender:</label><br>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male"> Male</label><br>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female"> Female</label><br><br>
+    <input type="checkbox" id="terms" name="terms" value="agree">
+    <label for="terms"> I agree to the terms and conditions</label><br>
+    <input type="checkbox" id="updates" name="updates" value="email">
+    <label for="updates"> Receive email updates</label><br>
+    <input type="checkbox" id="offers" name="offers" value="special">
+    <label for="offers"> Get special offers</label><br>
+    <input type="checkbox" id="alerts" name="alerts" value="sms">
+    <label for="alerts"> Enable SMS alerts</label><br><br>
+    <label for="links">Links</label><br>
+    <input type="url" id="links" name="links"><br><br>
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" min="0" max="120"><br>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
 </body>
 </html>
